@@ -1,41 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SecureShield Antivirus</title>
+    <title>Safety Checker</title>
     <style>
-        /* Reset some default styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
         body {
-            background-color: #f4f6f8;
-            color: #333;
+            font-family: Arial;
+            text-align: center;
+            margin-top: 100px;
         }
 
-        header {
-            background-color: #0b3d91;
-            color: white;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        input {
+            padding: 10px;
+            width: 300px;
         }
 
-        header h1 {
-            font-size: 28px;
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
             font-weight: bold;
         }
 
-        nav a:hover {
+        #downloadBtn {
+            display: none;
+            background-color: green;
+            color: white;
+            border: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Website & Email Safety Checker</h1>
+
+<input type="text" id="userInput" placeholder="Enter website or email">
+<br>
+
+<button onclick="checkSafety()">Check Safety</button>
+
+<div id="result"></div>
+
+<button id="downloadBtn">Download Antivirus</button>
+
+<script>
+
+function checkSafety() {
+
+    let input = document.getElementById("userInput").value.toLowerCase();
+
+    let unsafeWords = ["scam", "phishing", "hack", "fake"];
+
+    let isUnsafe = false;
+
+    for (let i = 0; i < unsafeWords.length; i++) {
+
+        if (input.includes(unsafeWords[i])) {
+            isUnsafe = true;
+            break;
+        }
+
+    }
+
+    if (isUnsafe) {
+        document.getElementById("result").innerHTML =
+            "⚠ Unsafe - Potential threat detected";
+        document.getElementById("result").style.color = "red";
+    }
+    else {
+        document.getElementById("result").innerHTML =
+            "✔ Safe - No threats detected";
+        document.getElementById("result").style.color = "green";
+    }
+
+    document.getElementById("downloadBtn").style.display = "inline-block";
+}
+
+</script>
+
+</body>
+</html>
